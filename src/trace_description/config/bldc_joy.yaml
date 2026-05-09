@@ -1,0 +1,24 @@
+# bldc_joy.yaml
+# Add this to your joy_teleop config (or use as a standalone config).
+# Maps a PS4 button to publish std_msgs/Bool on /bldc/enable.
+#
+# PS4 button indices (standard Linux mapping):
+#   0 = Cross,  1 = Circle,  2 = Square,  3 = Triangle
+#   4 = L1,     5 = R1,      6 = L2,      7 = R2
+#   8 = Share,  9 = Options
+#
+# This example uses R1 (button 5) as a momentary hold-to-run trigger.
+# Change button_index to whichever button suits your layout.
+
+joy_teleop:
+  ros__parameters:
+
+    # --- existing axes (keep your current ones) ---
+
+    # BLDC toggle: hold R1 to enable motors
+    bldc_enable:
+      type: button
+      interface_type: std_msgs/msg/Bool
+      topic_name: /bldc/enable
+      deadman_button: -1       # -1 = no separate deadman needed
+      button: 7               # R1 on PS4

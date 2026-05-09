@@ -1,0 +1,11 @@
+<library path = "trace_firmware">
+    <class name = "trace_firmware/TraceInterface"
+            type="trace_firmware::TraceInterface"
+            base_class_type="hardware_interface::SystemInterface">
+            <description>
+                Trace hardware interface
+            </description>
+
+    </class>
+
+</library>

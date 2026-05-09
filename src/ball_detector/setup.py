@@ -25,6 +25,7 @@ setup(
     entry_points={
     'console_scripts': [
         'ball_detector = ball_detector.ball_detector_node:main',
+        'ball_distance = ball_detector.ball_distance_node:main',
     ],
 },
 )

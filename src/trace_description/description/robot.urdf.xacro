@@ -2,8 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
 
     <xacro:arg name="use_ros2_control" default="true"/>
-
-    <xacro:include filename="robot_core.xacro" />
+    
+    <xacro:include filename="trace_core.xacro" />
+    <xacro:include filename = "depth_camera.xacro"/>
 
     <!-- Switch between ros2_control and Gazebo integrated diff-drive control -->
     <xacro:if value="$(arg use_ros2_control)">
@@ -13,10 +14,10 @@
         <xacro:include filename="gazebo_control.xacro" />
     </xacro:unless>
 
-    <!--<xacro:include filename = "gazebo_control.xacro"/>--> 
     <!-- <xacro:include filename = "lidar.xacro"/>  Deactivating Lidar for now because I do not need it-->
     <!--<xacro:include filename = "camera.xacro"/>-->
-    <xacro:include filename = "depth_camera.xacro"/>
+    <!--<xacro:include filename="robot_core.xacro" />-->
+    
     
 
 </robot>
