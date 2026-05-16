@@ -88,6 +88,21 @@ def generate_launch_description():
     }]
     )
 
+    ball_collect_node = Node(
+    package='trace_firmware',
+    executable='ball_collect_node.py',
+    name='ball_collect_node',
+    output='screen',
+    parameters=[{
+        'kp': 0.002,
+        'dead_zone': 20.0,
+        'max_angular_z': 0.5,
+        'approach_speed': 0.1,
+        'watchdog_timeout': 0.5,
+        'toggle_button': 2,
+    }]
+)
+
     return LaunchDescription([
         robot_state_publisher,
         controller_manager,
@@ -97,4 +112,5 @@ def generate_launch_description():
         teleop_node,
         bldc_launch,
         ball_orient_node,
+        ball_collect_node,
     ])
