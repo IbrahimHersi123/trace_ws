@@ -2,6 +2,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
+from std_msgs.msg import Bool
 import serial
 import serial.serialutil
 
@@ -31,7 +32,15 @@ class BldcNode(Node):
             10
         )
 
+        self.enable_sub_ = self.create_subscription(
+            Bool,
+            '/bldc/enable',
+            self.enable_callback,
+            10
+        )
+
         self.get_logger().info(f'BLDC node started on {port}, toggle button index: {self.button_index_}')
+        self.get_logger().info('BLDC node also listening on /bldc/enable topic')
 
     def _open_serial(self, port, baud):
         try:
@@ -53,6 +62,15 @@ class BldcNode(Node):
 
         self.enabled_ = pressed
         self._send(pressed)
+
+    def enable_callback(self, msg: Bool):
+        # Only act on state changes to avoid spamming serial
+        if msg.data == self.enabled_:
+            return
+
+        self.enabled_ = msg.data
+        self._send(msg.data)
+        self.get_logger().info(f'BLDC motors -> {"ON" if msg.data else "OFF"} (via topic)')
 
     def _send(self, enable: bool):
         if self.serial_ is None or not self.serial_.is_open:

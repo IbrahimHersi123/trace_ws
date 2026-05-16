@@ -18,7 +18,7 @@ def generate_launch_description():
         parameters=[{
             'use_sim_time': False,
             'port': '/dev/ttyBLDC',
-            'button': 7,        # R2 — change to whichever button you want
+            'button': 4,        # R2 — change to whichever button you want
         }]
     )
 

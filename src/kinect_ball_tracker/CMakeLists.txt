@@ -1,0 +1,59 @@
+cmake_minimum_required(VERSION 3.8)
+project(kinect_ball_tracker)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
+
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+# Old / full tracker node
+add_executable(kinect_ball_tracker_node
+  src/kinect_ball_tracker_node.cpp
+)
+
+ament_target_dependencies(kinect_ball_tracker_node
+  rclcpp
+  sensor_msgs
+  std_msgs
+  geometry_msgs
+)
+
+target_link_libraries(kinect_ball_tracker_node
+  ${OpenCV_LIBS}
+)
+
+# New lightweight tracker node
+add_executable(light_ball_tracker_node
+  src/light_ball_tracker_node.cpp
+)
+
+ament_target_dependencies(light_ball_tracker_node
+  rclcpp
+  sensor_msgs
+  std_msgs
+)
+
+target_link_libraries(light_ball_tracker_node
+  ${OpenCV_LIBS}
+)
+
+install(TARGETS
+  kinect_ball_tracker_node
+  light_ball_tracker_node
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+ament_package()

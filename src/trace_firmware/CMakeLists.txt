@@ -57,6 +57,8 @@ install(
 install(PROGRAMS
   trace_firmware/mpu6050_driver.py
   trace_firmware/bldc_node.py
+  trace_firmware/ball_orient_node.py
+  trace_firmware/ball_collect_node.py
   DESTINATION lib/${PROJECT_NAME}) 
 
 

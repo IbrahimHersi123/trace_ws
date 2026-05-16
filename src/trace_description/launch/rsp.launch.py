@@ -3,7 +3,8 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
-from launch.substitutions import LaunchConfiguration, Command
+from launch.substitutions import LaunchConfiguration
+from launch.substitutions import Command
 from launch.actions import DeclareLaunchArgument
 from launch_ros.actions import Node
 
@@ -37,9 +38,9 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='true',
+            default_value='false',
             description='Use sim time if true'),
-            DeclareLaunchArgument(
+        DeclareLaunchArgument(
             'use_ros2_control',
             default_value='true',
             description='Use ros2_control if true'),

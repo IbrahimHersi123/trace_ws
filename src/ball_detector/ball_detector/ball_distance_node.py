@@ -52,7 +52,7 @@ class BallDistanceNode(Node):
         self.sync = message_filters.ApproximateTimeSynchronizer(
             [self.rgb_sub, self.depth_sub],
             queue_size=10,
-            slop=0.1,
+            slop=0.5,
         )
         self.sync.registerCallback(self.sync_callback)
 
@@ -162,6 +162,7 @@ class BallDistanceNode(Node):
 
     # ── Synchronised callback ──────────────────────────────────────────────────
     def sync_callback(self, rgb_msg: Image, depth_msg: Image):
+        
         self._read_params()
 
         try:

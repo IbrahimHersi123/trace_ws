@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>kinect_ball_tracker</name>
+  <version>0.0.0</version>
+  <description>Kinect tennis ball tracker using RGB detection and depth distance estimation.</description>
+
+  <maintainer email="ibrahim@example.com">ibrahim</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <!-- System dependency. If rosdep complains, you can omit this because libopencv-dev is already installed. -->
+  <build_depend>libopencv-dev</build_depend>
+  <exec_depend>libopencv-dev</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
